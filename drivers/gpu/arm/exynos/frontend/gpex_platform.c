@@ -48,7 +48,9 @@
 
 #include <runtime_test_runner.h>
 
-int gpex_platform_init(struct device **dev)
+static struct exynos_context platform;
+
+struct exynos_context *gpex_platform_get_context(void)
 {
 	/* TODO: check return value */
 	/* TODO: becareful with order */
@@ -96,7 +98,7 @@ int gpex_platform_init(struct device **dev)
 	return 0;
 }
 
-void gpex_platform_term()
+void gpex_platform_term(void)
 {
 	runtime_test_runner_term();
 

@@ -76,4 +76,10 @@ void mali_exynos_sysfs_set_gpu_model_callback(sysfs_read_func show_gpu_model_fn)
 /* debug */
 void mali_exynos_debug_print_info(struct kbase_device *kbdev);
 
+void mali_exynos_coherency_reg_map(void);
+void mali_exynos_coherency_reg_unmap(void);
+void mali_exynos_coherency_set_coherency_feature(void);
+void mali_exynos_llc_set_awuser(void);
+void mali_exynos_llc_set_aruser(void);
+
 #endif /* _MALI_EXYNOS_KBASE_ENTRYPOINTS_H_ */
