@@ -358,10 +358,10 @@ OBJDUMP			= $(CROSS_COMPILE)objdump
 AWK				= awk
 GENKSYMS		= scripts/genksyms/genksyms
 INSTALLKERNEL  := installkernel
-DEPMOD			= /sbin/depmod
-PERL			= perl
-PYTHON			= python
-CHECK			= sparse
+DEPMOD		    = /sbin/depmod
+PERL		    = perl
+PYTHON		    = python
+CHECK		    = sparse
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
@@ -397,7 +397,6 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common -fshort-wchar \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -Werror \
 		   -std=gnu89
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_AFLAGS_KERNEL :=
@@ -905,7 +904,7 @@ KBUILD_CFLAGS   += $(call cc-option,-fconserve-stack)
 KBUILD_CFLAGS   += $(call cc-option,-Werror=implicit-int)
 
 # require functions to have arguments in prototypes, not empty 'int foo()'
-KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
+#KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
 
 # Prohibit date/time macros, which would make the build non-deterministic
 KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)

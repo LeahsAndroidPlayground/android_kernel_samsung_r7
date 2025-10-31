@@ -164,5 +164,5 @@ if os.path.isfile(func_file):
         for line in f:
             keep_magic.add(line.strip())
 else:
-    print "Skipping ", func_file
+    print("Skipping ", func_file)
        

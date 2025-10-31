@@ -1,0 +1,5 @@
+*.o
+*.ko
+
+scripts/rkp_cfp/tmp
+scripts/rkp_cfp/__pycache__

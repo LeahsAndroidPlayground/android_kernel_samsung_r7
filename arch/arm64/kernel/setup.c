@@ -238,9 +238,9 @@ static void __init request_standard_resources(void)
 	struct resource *res;
 
 	kernel_code.start   = __pa_symbol(_text);
-	kernel_code.end     = __pa_symbol(__init_begin - 1);
+	kernel_code.end     = __pa_symbol((unsigned long)__init_begin - 1);
 	kernel_data.start   = __pa_symbol(_sdata);
-	kernel_data.end     = __pa_symbol(_end - 1);
+	kernel_data.end     = __pa_symbol((unsigned long)_end - 1);
 
 	for_each_memblock(memory, region) {
 		res = alloc_bootmem_low(sizeof(*res));

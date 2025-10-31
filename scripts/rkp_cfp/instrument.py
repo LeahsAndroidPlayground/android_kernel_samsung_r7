@@ -26,6 +26,7 @@ import multiprocessing
 import math
 import tempfile
 import pipes
+import shlex
 
 # NOTE: must be kept in sync with macro definitions in init/hyperdrive.S
 RRX_DEFAULT = 16
@@ -152,7 +153,7 @@ def skip_func(func, skip, skip_asm):
            func in skip
 
 def parse_last_insn(objdump, i, n):
-    return [objdump.parse_insn(j) if objdump.is_insn(j) else None for j in xrange(i-n, i)]
+    return [objdump.parse_insn(j) if objdump.is_insn(j) else None for j in range(i-n, i)]
 
 def instrument(objdump, func=None, skip=set([]), skip_stp=set([]), skip_asm=set([]), skip_blr=set([]), keep_magic=set([]), threads=1):
     """
@@ -184,7 +185,7 @@ def instrument(objdump, func=None, skip=set([]), skip_stp=set([]), skip_asm=set(
     def __instrument(func=None, start_func=None, end_func=None, start_i=None, end_i=None,
             tid=None):
         def parse_insn_range(i, r):
-            return [objdump.parse_insn(j) if objdump.is_insn(j) else None for j in xrange(i, r)]
+            return [objdump.parse_insn(j) if objdump.is_insn(j) else None for j in range(i, r)]
 
         #
         # Instrumentation of function prologues.
@@ -365,7 +366,7 @@ class Objdump(object):
         os.close(fd)
 
         subprocess.check_call("{OBJDUMP} -d {vmlinux} > {tmp}".format(
-            OBJDUMP=OBJDUMP, vmlinux=pipes.quote(self.vmlinux), tmp=pipes.quote(tmp)), shell=True)
+            OBJDUMP=OBJDUMP, vmlinux=shlex.quote(self.vmlinux), tmp=shlex.quote(tmp)), shell=True)
 
         # NOTE: DON'T MOVE THIS.
         # We are adding to the objdump output symbols from the data section.
@@ -774,7 +775,7 @@ class Objdump(object):
         [ ("func_1", 0), ("func_2", 1), ... ]
         """
         def __funcs():
-            for func, i_set in self.func_idx.iteritems():
+            for func, i_set in self.func_idx.items():
                 for i in i_set:
                     yield func, i
         funcs = list(__funcs())
@@ -880,7 +881,7 @@ class Objdump(object):
                 return self.line(i) if raw_line else self.parse_insn(i)
             return to_yield
 
-        for i in xrange(i, min(end, len(self.lines) - 1) + 1):
+        for i in range(i, min(end, len(self.lines) - 1) + 1):
 
             to_yield = None
 
@@ -917,7 +918,7 @@ class Objdump(object):
         i = 0
         funcs = self.funcs()
         chunk = int(math.ceil(len(funcs)/float(threads)))
-        for n in xrange(threads):
+        for n in range(threads):
             start_func_idx = i
             end_func_idx = min(i+chunk-1, len(funcs)-1)
             start_i = funcs[start_func_idx][1]
@@ -1023,7 +1024,7 @@ def parse_nm(vmlinux, symbols=None):
       'cpu_resume':('D', 'ffffffc0000935f0', 36)
     }
     """
-    proc = subprocess.Popen(["{NM} {vmlinux} | sort".format(NM=NM, vmlinux=vmlinux)], shell=True, stdout=subprocess.PIPE)
+    proc = subprocess.Popen(["{NM} {vmlinux} | sort".format(NM=NM, vmlinux=vmlinux)], shell=True, stdout=subprocess.PIPE, text=True)
     f = each_procline(proc)
     nm = {}
     last_symbol = None
@@ -1064,7 +1065,7 @@ def parse_sections(vmlinux):
       ...
     }
     """
-    proc = subprocess.Popen([OBJDUMP, '--section-headers', vmlinux], stdout=subprocess.PIPE)
+    proc = subprocess.Popen([OBJDUMP, '--section-headers', vmlinux], stdout=subprocess.PIPE, text=True)
     f = each_procline(proc)
     d = {
         'sections': [],
@@ -1074,14 +1075,16 @@ def parse_sections(vmlinux):
     section_idx = 0
     while True:
         try:
-            line = it.next()
+            line = next(it)
         except StopIteration:
             break
 
+        if isinstance(line, bytes):
+            line = line.decode('utf-8', 'ignore')
         m = re.search(r'^Sections:', line)
         if m:
             # first section
-            it.next()
+            next(it)
             continue
 
         m = re.search((
@@ -1107,7 +1110,7 @@ def parse_sections(vmlinux):
                 [int, ['number']],
                 [parse_power, ['align']]]))
 
-            line = it.next()
+            line = next(it)
             # CONTENTS, ALLOC, LOAD, READONLY, CODE
             m = re.search((
             r'\s+(?P<type>.*)'
@@ -1245,7 +1248,7 @@ def byte_string(xs):
     if type(xs) == list:
         return ''.join(xs)
     elif type(xs) in [int, long]:
-        return ''.join([chr((xs >> 8*i) & 0xff) for i in xrange(3, -1, 0-1)])
+        return ''.join([chr((xs >> 8*i) & 0xff) for i in range(3, -1, 0-1)])
     return xs
 def hexint(b):
     return int(binascii.hexlify(byte_string(b)), 16)
@@ -1303,7 +1306,7 @@ if common.run_from_ipython():
     #import pdb; pdb.set_trace()
     o = load_and_cache_objdump(sample_vmlinux_file, config_file=sample_config_file)
 
-    print "in function common.run_from_ipython()"
+    print("in function common.run_from_ipython()")
 
     def _instrument(func=None, skip=common.skip, validate=True, threads=DEFAULT_THREADS):
         instrument(o, func=func, skip=common.skip, skip_stp=common.skip_stp, skip_asm=common.skip_asm, threads=threads)
