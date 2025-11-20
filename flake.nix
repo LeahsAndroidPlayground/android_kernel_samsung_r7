@@ -22,20 +22,12 @@
           pkgs.python3
           pkgs.gnumake
           pkgs.bc
-          frostix.gcc-aarch64-linux-gnu
+          frostix.gcc-toolchain.gcc-aarch64-linux-gnu
         ];
 
         shellHook = ''
           export ARCH=arm64
           export CROSS_COMPILE=aarch64-none-linux-gnu-
-          #export CC=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}gcc
-          #export AS=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}as
-          #export AR=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}ar
-          #export LD=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}ld
-          #export OBJCOPY=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}objcopy
-          #export OBJDUMP=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}objdump
-          #export NM=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}nm
-          #export RANLIB=${frostix.gcc-aarch64-linux-gnu}/bin/''${CROSS_COMPILE}ranlib
           export PLATFORM_VERSION=13
           export O=out/
           echo "Set AOSP/OneUI variables for kernel compilation :D"
