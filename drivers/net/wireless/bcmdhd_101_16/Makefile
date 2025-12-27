@@ -31,6 +31,10 @@ DHDCFLAGS += -Wall -Werror -Wstrict-prototypes -Dlinux -DLINUX -DBCMDRIVER      
         -DPKT_FILTER_SUPPORT -DEMBEDDED_PLATFORM -DPNO_SUPPORT          \
         -DSEC_ENHANCEMENT
 
+DHDCFLAGS += $(call cc-disable-warning, stringop-overflow)
+DHDCFLAGS += $(call cc-disable-warning, address)
+DHDCFLAGS += $(call cc-disable-warning, restrict)
+
 DHDCFLAGS += -DOEM_ANDROID
 
 #####################
