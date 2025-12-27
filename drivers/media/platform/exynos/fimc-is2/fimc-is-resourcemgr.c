@@ -560,18 +560,18 @@ static int fimc_is_resourcemgr_init_dynamic_mem(struct fimc_is_resourcemgr *reso
 
 	kva = CALL_BUFOP(minfo->pb_taaisp, kvaddr, minfo->pb_taaisp);
 	dva = CALL_BUFOP(minfo->pb_taaisp, dvaddr, minfo->pb_taaisp);
-	info("[RSC] STAT_DMA memory kva:0x%1x, dva: %pad\n", kva, &dva);
+	info("[RSC] STAT_DMA memory kva:0x%lx, dva: %pad\n", kva, &dva);
 
 #if (MEDRC_DMA_SIZE > 0)
 	kva = CALL_BUFOP(minfo->pb_medrc, kvaddr, minfo->pb_medrc);
 	dva = CALL_BUFOP(minfo->pb_medrc, dvaddr, minfo->pb_medrc);
-	info("[RSC] ME_DRC memory kva:0x%1x, dva: %pad\n", kva, &dva);
+	info("[RSC] ME_DRC memory kva:0x%lx, dva: %pad\n", kva, &dva);
 #endif
 
 #if defined(ENABLE_TNR)
 	kva = CALL_BUFOP(minfo->pb_tnr, kvaddr, minfo->pb_tnr);
 	dva = CALL_BUFOP(minfo->pb_tnr, dvaddr, minfo->pb_tnr);
-	info("[RSC] TNR_DMA memory kva:0x%1x, dva: %pad\n", kva, &dva);
+	info("[RSC] TNR_DMA memory kva:0x%lx, dva: %pad\n", kva, &dva);
 #endif
 
 	info("[RSC] %s done\n", __func__);

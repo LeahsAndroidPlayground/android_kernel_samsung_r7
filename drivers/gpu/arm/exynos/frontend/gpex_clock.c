@@ -76,12 +76,14 @@ u64 gpex_clock_get_time_busy(int level)
 /*******************************************
  * static helper functions
  ******************************************/
-static int gpex_clock_update_config_data_from_dt()
+static int gpex_clock_update_config_data_from_dt(int a)
 {
 	int ret = 0;
 	struct freq_volt *fv_array;
 	int asv_lv_num;
 	int i, j;
+
+	pr_debug("Unused arg! %i\n", a);
 
 	clk_info.gpu_max_clock = gpexbe_devicetree_get_int(gpu_max_clock);
 	clk_info.gpu_min_clock = gpexbe_devicetree_get_int(gpu_min_clock);
@@ -321,7 +323,7 @@ int gpex_clock_init(struct device **dev)
 		clk_info.user_min_lock[i] = 0;
 	}
 
-	gpex_clock_update_config_data_from_dt();
+	gpex_clock_update_config_data_from_dt(1);
 	gpex_clock_init_time_in_state();
 	gpex_clock_sysfs_init(&clk_info);
 

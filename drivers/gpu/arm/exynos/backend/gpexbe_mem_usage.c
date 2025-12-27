@@ -102,9 +102,9 @@ static int mali_used_size_notifier(struct notifier_block *nb,
 
 	s = (struct seq_file *)data;
 	if (s != NULL)
-		seq_printf(s, "mali:           %8lu kB\n", used_pages);
+		seq_printf(s, "mali:           %i kB\n", used_pages);
 	else
-		pr_cont("mali:%lukB ", used_pages);
+		pr_cont("mali:%ikB ", used_pages);
 
 	return 0;
 }

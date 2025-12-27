@@ -87,4 +87,8 @@ int gpex_dvfs_sysfs_init(struct dvfs_info *_dvfs);
 int gpex_dvfs_external_init(struct dvfs_info *_dvfs);
 int gpu_dvfs_governor_init(struct dvfs_info *_dvfs);
 
+static void gpu_dvfs_calculate_env_data(void);
+static void gpu_pm_metrics_init(void);
+static void gpu_pm_metrics_term(void);
+
 #endif /* _GPEX_DVFS_INTERNAL_H_ */

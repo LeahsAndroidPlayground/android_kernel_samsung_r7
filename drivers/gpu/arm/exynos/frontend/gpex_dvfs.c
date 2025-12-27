@@ -85,7 +85,7 @@ static void gpex_dvfs_context_init(struct device **dev)
 	dvfs.polling_speed = gpexbe_devicetree_get_int(gpu_dvfs_polling_time);
 }
 
-static int gpu_dvfs_calculate_env_data()
+static void gpu_dvfs_calculate_env_data()
 {
 	unsigned long flags;
 	static int polling_period;
@@ -96,10 +96,8 @@ static int gpu_dvfs_calculate_env_data()
 	spin_unlock_irqrestore(&dvfs.spinlock, flags);
 
 	polling_period -= dvfs.polling_speed;
-	if (polling_period > 0)
-		return 0;
 
-	return 0;
+	return;
 }
 
 static int kbase_platform_dvfs_event(u32 utilisation)
@@ -254,7 +252,7 @@ static int gpu_dvfs_handler_deinit()
 	return 0;
 }
 
-static int gpu_pm_metrics_init()
+static void gpu_pm_metrics_init()
 {
 	INIT_DELAYED_WORK(&dvfs.dvfs_work, dvfs_callback);
 	dvfs.dvfs_wq = create_workqueue("g3d_dvfs");
@@ -262,7 +260,7 @@ static int gpu_pm_metrics_init()
 	queue_delayed_work_on(0, dvfs.dvfs_wq, &dvfs.dvfs_work,
 			      msecs_to_jiffies(dvfs.polling_speed));
 
-	return 0;
+	return;
 }
 
 static void gpu_pm_metrics_term()

@@ -1180,7 +1180,7 @@ int sensor_2l2_cis_get_min_exposure_time(struct v4l2_subdev *subdev, u32 *min_ex
 
 	vt_pic_clk_freq_khz = cis_data->pclk / 1000;
 	if (vt_pic_clk_freq_khz == 0) {
-		pr_err("[MOD:D:%d] %s, Invalid vt_pic_clk_freq_khz(%d)\n", cis->id, __func__, vt_pic_clk_freq_khz);
+		pr_err("[MOD:D:%d] %s, Invalid vt_pic_clk_freq_khz(%llu)\n", cis->id, __func__, vt_pic_clk_freq_khz);
 		goto p_err;
 	}
 	line_length_pck = cis_data->line_length_pck;
@@ -1232,7 +1232,7 @@ int sensor_2l2_cis_get_max_exposure_time(struct v4l2_subdev *subdev, u32 *max_ex
 
 	vt_pic_clk_freq_khz = cis_data->pclk / 1000;
 	if (vt_pic_clk_freq_khz == 0) {
-		pr_err("[MOD:D:%d] %s, Invalid vt_pic_clk_freq_khz(%d)\n", cis->id, __func__, vt_pic_clk_freq_khz);
+		pr_err("[MOD:D:%d] %s, Invalid vt_pic_clk_freq_khz(%llu)\n", cis->id, __func__, vt_pic_clk_freq_khz);
 		goto p_err;
 	}
 	line_length_pck = cis_data->line_length_pck;

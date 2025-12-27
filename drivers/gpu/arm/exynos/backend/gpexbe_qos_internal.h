@@ -18,7 +18,9 @@
  * http://www.gnu.org/licenses/gpl-2.0.html.
  */
 
-static inline pmqos_flag_check(mali_pmqos_flags type, mali_pmqos_flags in)
+static int pmqos_flag_check(mali_pmqos_flags, mali_pmqos_flags);
+
+static int pmqos_flag_check(mali_pmqos_flags type, mali_pmqos_flags in)
 {
 	return (type & in) == in;
 }

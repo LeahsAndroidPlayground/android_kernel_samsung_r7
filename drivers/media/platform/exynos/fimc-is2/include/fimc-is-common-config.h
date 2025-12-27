@@ -300,23 +300,12 @@ extern int debug_sensor;
  */
 #define dbg(fmt, args...)
 
-#define dbg_sensor(level, fmt, args...) \
-	dbg_common(((debug_sensor) >= (level)) && (debug_sensor < 3), "[SSD]", fmt, ##args)
-
-#define dbg_actuator(fmt, args...) \
-	dbg_common((debug_sensor >= 3) && (debug_sensor < 4), "[ACT]", fmt, ##args)
-
-#define dbg_flash(fmt, args...) \
-	dbg_common((debug_sensor >= 4) && (debug_sensor < 5), "[FLS]", fmt, ##args)
-
-#define dbg_preproc(fmt, args...) \
-	dbg_common((debug_sensor >= 5) && (debug_sensor < 6), "[PRE]", fmt, ##args)
-
-#define dbg_aperture(fmt, args...) \
-	dbg_common((debug_sensor >= 6) && (debug_sensor < 7), "[APERTURE]", fmt, ##args)
-
-#define dbg_ois(fmt, args...) \
-	dbg_common((debug_sensor >= 7) && (debug_sensor < 8), "[OIS]", fmt, ##args)
+#define dbg_sensor(level, fmt, args...)
+#define dbg_actuator(fmt, args...)
+#define dbg_flash(fmt, args...)
+#define dbg_preproc(fmt, args...)
+#define dbg_aperture(fmt, args...)
+#define dbg_ois(fmt, args...)
 
 /*
  * =================================================================================================

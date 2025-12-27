@@ -2701,8 +2701,9 @@ static void add_kallsyms(struct module *mod, const struct load_info *info)
 #endif /* CONFIG_KALLSYMS */
 
 #ifdef CONFIG_UH_LKM_BLOCK
-static int lkm_block()
+static int lkm_block(int a)
 {
+	pr_debug("pee: %i\n", a);
 	return RET_UH_LKM_BLOCK_FORCE;
 }
 #endif
@@ -2811,7 +2812,7 @@ static int elf_header_check(struct load_info *info)
 		return -ENOEXEC;
 
 #ifdef CONFIG_UH_LKM_BLOCK
-	if (lkm_block() != RET_LKM_BLOCK_SUCCESS) {
+	if (lkm_block(1) != RET_LKM_BLOCK_SUCCESS) {
 		pr_warn("UH: LKM is not allowed by Samsung security policy.\n");
 		return -ENOEXEC;
 	}
