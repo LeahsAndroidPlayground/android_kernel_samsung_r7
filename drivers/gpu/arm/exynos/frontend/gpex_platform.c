@@ -52,6 +52,11 @@ static struct exynos_context platform;
 
 struct exynos_context *gpex_platform_get_context(void)
 {
+	return &platform;
+}
+
+struct exynos_context *gpex_platform_init(struct device **dev)
+{
 	/* TODO: check return value */
 	/* TODO: becareful with order */
 	gpexbe_devicetree_init(*dev);
