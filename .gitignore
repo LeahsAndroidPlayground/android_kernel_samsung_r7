@@ -185,6 +185,8 @@ sphinx_*/
 # Rust analyzer configuration
 /rust-project.json
 
+modules.builtin
+
 arch/arm64/boot/boot.img
 arch/arm64/boot/out/
 #arch/arm64/boot/rebuild.sh
