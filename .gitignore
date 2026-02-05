@@ -196,3 +196,6 @@ __pycache__/
 
 scripts/rkp_cfp/tmp
 scripts/rkp_cfp/__pycache__
+
+out/
+
