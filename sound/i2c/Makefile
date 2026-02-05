@@ -10,6 +10,7 @@ snd-tea6330t-objs := tea6330t.o
 obj-$(CONFIG_SND) += other/
 
 # Toplevel Module Dependency
-obj-$(CONFIG_SND_INTERWAVE_STB) += snd-tea6330t.o snd-i2c.o
-obj-$(CONFIG_SND_ICE1712) += snd-cs8427.o snd-i2c.o
-obj-$(CONFIG_SND_ICE1724) += snd-i2c.o
+obj-$(CONFIG_SND_INTERWAVE_STB)	+= snd-tea6330t.o snd-i2c.o
+obj-$(CONFIG_SND_ICE1712)		+= snd-cs8427.o snd-i2c.o
+obj-$(CONFIG_SND_ICE1724)		+= snd-i2c.o
+obj-y							+= dummy.o

@@ -7,7 +7,7 @@
 #
 
 # When adding new entries keep the list in alphabetical order
-obj-y += hid-sensors/
-obj-y += ms_sensors/
-obj-y += ssp_sensors/
-obj-y += st_sensors/
+obj-$(HID_SENSOR_IIO_COMMON)	+= hid-sensors/
+obj-$(IIO_MS_SENSORS_I2C) 	+= ms_sensors/
+obj-$(IIO_SSP_SENSORS_COMMONS)	+= ssp_sensors/
+obj-$(IIO_ST_SENSORS_CORE)	+= st_sensors/

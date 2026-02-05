@@ -1,6 +1,6 @@
 #
 # Makefile for the Cavium ethernet device drivers.
 #
-obj-$(CONFIG_NET_VENDOR_CAVIUM) += thunder/
-obj-$(CONFIG_NET_VENDOR_CAVIUM) += liquidio/
-obj-$(CONFIG_NET_VENDOR_CAVIUM) += octeon/
+obj-$(CONFIG_THUNDER_NIC_PF)		+= thunder/
+obj-$(CONFIG_LIQUIDIO)				+= liquidio/
+obj-$(CONFIG_OCTEON_MGMT_ETHERNET)	+= octeon/

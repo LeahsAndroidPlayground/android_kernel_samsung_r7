@@ -2,18 +2,18 @@
 # Makefile for the kernel multimedia device drivers.
 #
 
-obj-y        +=	ttpci/		\
-		b2c2/		\
-		pluto2/		\
-		dm1105/		\
-		pt1/		\
-		pt3/		\
-		mantis/		\
-		ngene/		\
-		ddbridge/	\
-		saa7146/	\
-		smipcie/	\
-		netup_unidvb/
+#obj-y        +=	ttpci/		\
+#		b2c2/		\
+#		pluto2/		\
+#		dm1105/		\
+#		pt1/		\
+#		pt3/		\
+#		mantis/		\
+#		ngene/		\
+#		ddbridge/	\
+#		saa7146/	\
+#		smipcie/	\
+#		netup_unidvb/
 
 obj-$(CONFIG_VIDEO_IVTV) += ivtv/
 obj-$(CONFIG_VIDEO_ZORAN) += zoran/

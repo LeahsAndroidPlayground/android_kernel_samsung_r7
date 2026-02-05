@@ -80,3 +80,5 @@ obj-$(CONFIG_SND) += \
 	trident/ \
 	ymfpci/ \
 	vx222/
+
+obj-y	+= dummy.o

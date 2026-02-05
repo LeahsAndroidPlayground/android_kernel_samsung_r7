@@ -1,1 +1,1 @@
-obj-y	+= lib/
+obj-$(CONFIG_IRQ_BYPASS_MANAGER)	+= lib/

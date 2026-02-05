@@ -18,9 +18,12 @@ ifeq ($(CONFIG_RELOCATABLE), y)
 # Pass --no-apply-dynamic-relocs to restore pre-binutils-2.27 behaviour
 # for relative relocs, since this leads to better Image compression
 # with the relocation offsets always being zero.
-LDFLAGS_vmlinux		+= -pie -shared -Bsymbolic \
+LDFLAGS_vmlinux		+= -shared -Bsymbolic -z notext \
 			$(call ld-option, --no-apply-dynamic-relocs)
-endif
+#ifdef CONFIG_ARM64_KERNEL_PIE
+#KBUILD_LDFLAGS += -pie
+#endif # ifdef CONFIG_ARM64_KERNEL_PIE
+endif # ifeq ($(CONFIG_RELOCATABLE), y)
 
 ifeq ($(CONFIG_ARM64_ERRATUM_843419),y)
   ifeq ($(call ld-option, --fix-cortex-a53-843419),)
